@@ -1,0 +1,147 @@
+/* miniprogram/pages/index/index.less */
+@import '../../app.less';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 32rpx;
+  box-sizing: border-box;
+  background-color: #f8f9fa; // 更柔和的背景色
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60rpx;
+
+  .logo {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 24rpx;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24rpx;
+  }
+
+  .title {
+    font-size: 44rpx;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .subtitle {
+    font-size: 28rpx;
+    color: #888;
+    margin-top: 8rpx;
+  }
+}
+
+.input-card {
+  width: 100%;
+  padding: 32rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+
+  .input-field {
+    margin-bottom: 32rpx;
+    // 使用 t-input 内置的 class 进行样式微调
+    --td-input-border-color: #e7e7e7;
+    --td-input-bg-color: #f9f9f9;
+    --td-input-border-radius: 16rpx;
+  }
+
+  .parse-button {
+    --td-button-border-radius: 16rpx;
+    --td-button-primary-bg-color: @primary-color;
+    --td-button-primary-border-color: @primary-color;
+  }
+}
+
+.loading-container {
+  margin-top: 80rpx;
+  color: #888;
+}
+
+.result-card {
+  width: 100%;
+  margin-top: 40rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8px F24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-in-out;
+
+  .video-cover {
+    width: 100%;
+    height: 400rpx;
+  }
+
+  .video-details {
+    padding: 24rpx;
+
+    .video-title {
+      font-size: 32rpx;
+      font-weight: 600;
+      color: #333;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      margin-top: 16rpx;
+      .author-name {
+        margin-left: 12rpx;
+        font-size: 26rpx;
+        color: #666;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 24rpx;
+    padding: 0 24rpx 24rpx;
+  }
+}
+
+.history-entry {
+  margin-top: 40rpx;
+  color: #888;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 20rpx; // 适配iPhone底部安全区
+  --td-footer-color: #c0c4cc;
+  --td-footer-link-color: @primary-color;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

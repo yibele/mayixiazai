@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "视频解析",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-footer": "tdesign-miniprogram/footer/footer",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar"
+  }
+}
