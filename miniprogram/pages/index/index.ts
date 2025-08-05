@@ -61,6 +61,49 @@ Page({
     });
   },
 
+  // 清空输入框
+  clearInput() {
+    this.setData({
+      link: '',
+      videoInfo: null
+    });
+    wx.showToast({
+      title: '已清空',
+      icon: 'success',
+      duration: 1000
+    });
+  },
+
+  // 一键粘贴剪贴板内容
+  pasteFromClipboard() {
+    wx.getClipboardData({
+      success: (res) => {
+        const clipboardText = res.data;
+        if (clipboardText.trim()) {
+          this.setData({ link: clipboardText });
+          wx.showToast({
+            title: '粘贴成功',
+            icon: 'success',
+            duration: 1000
+          });
+        } else {
+          wx.showToast({
+            title: '剪贴板为空',
+            icon: 'error',
+            duration: 1000
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '读取剪贴板失败',
+          icon: 'error',
+          duration: 1000
+        });
+      }
+    });
+  },
+
   // 核心：开始分析
   startParse() {
     if (!this.data.link.trim()) {
