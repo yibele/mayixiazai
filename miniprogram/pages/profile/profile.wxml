@@ -1,0 +1,117 @@
+<!-- miniprogram/pages/profile/profile.wxml -->
+<view class="page-container">
+  <!-- TDesign导航栏 -->
+  <t-navbar title="我的" fixed>
+    <t-icon slot="right" name="setting" size="20" bind:tap="goToSettings" />
+  </t-navbar>
+
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <t-avatar 
+        size="120rpx" 
+        image="{{userInfo.avatarUrl}}" 
+        icon="user"
+        class="user-avatar"
+      />
+      <view class="user-details">
+        <view class="user-name">{{userInfo.nickName || '未登录'}}</view>
+        <view class="user-id">ID: {{userInfo.openid || '请先登录'}}</view>
+      </view>
+      <t-button 
+        wx:if="{{!isLogin}}"
+        size="small" 
+        theme="primary" 
+        bind:tap="handleLogin"
+      >
+        立即登录
+      </t-button>
+    </view>
+    
+    <!-- 积分余额 -->
+    <view class="points-section">
+      <view class="points-item">
+        <view class="points-value">{{userPoints}}</view>
+        <view class="points-label">积分余额</view>
+      </view>
+      <view class="points-item">
+        <view class="points-value">{{dailyUsage}}/{{dailyLimit}}</view>
+        <view class="points-label">今日使用</view>
+      </view>
+      <view class="points-item">
+        <view class="points-value">{{totalDownloads}}</view>
+        <view class="points-label">累计下载</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-group">
+      <view class="menu-item" bind:tap="goToDownloadHistory">
+        <view class="menu-icon">
+          <t-icon name="download" size="32rpx" color="#1976d2" />
+        </view>
+        <view class="menu-content">
+          <view class="menu-title">下载历史</view>
+          <view class="menu-desc">查看已下载的视频</view>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#c0c4cc" />
+      </view>
+
+      <view class="menu-item" bind:tap="goToPointsHistory">
+        <view class="menu-icon">
+          <t-icon name="wallet" size="32rpx" color="#4caf50" />
+        </view>
+        <view class="menu-content">
+          <view class="menu-title">积分记录</view>
+          <view class="menu-desc">积分获取和消费明细</view>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#c0c4cc" />
+      </view>
+
+      <view class="menu-item" bind:tap="goToInvite">
+        <view class="menu-icon">
+          <t-icon name="user-add" size="32rpx" color="#ff9800" />
+        </view>
+        <view class="menu-content">
+          <view class="menu-title">邀请好友</view>
+          <view class="menu-desc">邀请好友获得积分奖励</view>
+        </view>
+        <view class="menu-extra">
+          <text class="reward-text">+20积分</text>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#c0c4cc" />
+      </view>
+    </view>
+
+    <view class="menu-group">
+      <view class="menu-item" bind:tap="goToFeedback">
+        <view class="menu-icon">
+          <t-icon name="chat" size="32rpx" color="#e91e63" />
+        </view>
+        <view class="menu-content">
+          <view class="menu-title">意见反馈</view>
+          <view class="menu-desc">问题反馈和建议</view>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#c0c4cc" />
+      </view>
+
+      <view class="menu-item" bind:tap="goToAbout">
+        <view class="menu-icon">
+          <t-icon name="info-circle" size="32rpx" color="#9c27b0" />
+        </view>
+        <view class="menu-content">
+          <view class="menu-title">关于我们</view>
+          <view class="menu-desc">版本信息和联系方式</view>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#c0c4cc" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>蚂蚁下载器 v{{version}}</text>
+  </view>
+</view>

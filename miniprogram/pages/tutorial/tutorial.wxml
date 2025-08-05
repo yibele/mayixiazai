@@ -1,0 +1,212 @@
+<!-- miniprogram/pages/tutorial/tutorial.wxml -->
+<view class="page-container">
+  <!-- TDesign导航栏 -->
+  <t-navbar title="使用教程" left-arrow fixed bind:left-click="goBack" />
+
+  <!-- 教程内容 -->
+  <scroll-view class="tutorial-content" scroll-y enhanced>
+    
+    <!-- 欢迎卡片 -->
+    <view class="welcome-card">
+      <view class="welcome-icon">
+        <t-icon name="help-circle" size="64rpx" color="#1976d2" />
+      </view>
+      <view class="welcome-title">欢迎使用蚂蚁下载器</view>
+      <view class="welcome-desc">
+        一款专业的无水印视频下载工具，支持抖音、快手、小红书、B站等主流平台
+      </view>
+    </view>
+
+    <!-- 支持平台 -->
+    <view class="section">
+      <view class="section-title">
+        <t-icon name="layers" size="28rpx" color="#4caf50" />
+        <text>支持平台</text>
+      </view>
+      <view class="platform-grid">
+        <view class="platform-item">
+          <view class="platform-icon">📱</view>
+          <text>抖音</text>
+        </view>
+        <view class="platform-item">
+          <view class="platform-icon">🎬</view>
+          <text>快手</text>
+        </view>
+        <view class="platform-item">
+          <view class="platform-icon">📷</view>
+          <text>小红书</text>
+        </view>
+        <view class="platform-item">
+          <view class="platform-icon">📺</view>
+          <text>B站</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 使用步骤 -->
+    <view class="section">
+      <view class="section-title">
+        <t-icon name="list" size="28rpx" color="#ff9800" />
+        <text>使用步骤</text>
+      </view>
+      
+      <view class="step-list">
+        <view class="step-item">
+          <view class="step-number">1</view>
+          <view class="step-content">
+            <view class="step-title">复制视频链接</view>
+            <view class="step-desc">在抖音、快手等APP中，点击分享按钮，选择"复制链接"</view>
+            <view class="step-image">
+              <view class="placeholder-image">复制链接示意图</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="step-item">
+          <view class="step-number">2</view>
+          <view class="step-content">
+            <view class="step-title">粘贴到输入框</view>
+            <view class="step-desc">打开蚂蚁下载器，将链接粘贴到输入框中，或点击"一键粘贴"</view>
+          </view>
+        </view>
+
+        <view class="step-item">
+          <view class="step-number">3</view>
+          <view class="step-content">
+            <view class="step-title">开始解析</view>
+            <view class="step-desc">点击"开始分析"按钮，等待解析完成</view>
+          </view>
+        </view>
+
+        <view class="step-item">
+          <view class="step-number">4</view>
+          <view class="step-content">
+            <view class="step-title">下载视频</view>
+            <view class="step-desc">解析成功后，点击"下载视频"即可保存到相册</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 功能介绍 -->
+    <view class="section">
+      <view class="section-title">
+        <t-icon name="star" size="28rpx" color="#e91e63" />
+        <text>核心功能</text>
+      </view>
+      
+      <view class="feature-list">
+        <view class="feature-item">
+          <view class="feature-icon">
+            <t-icon name="download" size="32rpx" color="#1976d2" />
+          </view>
+          <view class="feature-info">
+            <view class="feature-name">无水印下载</view>
+            <view class="feature-desc">去除视频水印，获得高清原始视频</view>
+          </view>
+        </view>
+
+        <view class="feature-item">
+          <view class="feature-icon">
+            <t-icon name="file-text" size="32rpx" color="#4caf50" />
+          </view>
+          <view class="feature-info">
+            <view class="feature-name">文案提取</view>
+            <view class="feature-desc">一键提取视频文案，支持复制分享</view>
+          </view>
+        </view>
+
+        <view class="feature-item">
+          <view class="feature-icon">
+            <t-icon name="layers" size="32rpx" color="#ff9800" />
+          </view>
+          <view class="feature-info">
+            <view class="feature-name">批量解析</view>
+            <view class="feature-desc">解析用户主页所有视频，支持批量下载</view>
+          </view>
+          <view class="feature-badge">VIP</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 积分系统 -->
+    <view class="section">
+      <view class="section-title">
+        <t-icon name="gift" size="28rpx" color="#9c27b0" />
+        <text>积分系统</text>
+      </view>
+      
+      <view class="points-info">
+        <view class="points-card">
+          <view class="points-title">获得积分</view>
+          <view class="points-methods">
+            <view class="method-item">
+              <text class="method-name">观看广告</text>
+              <text class="method-points">+10积分</text>
+            </view>
+            <view class="method-item">
+              <text class="method-name">邀请好友</text>
+              <text class="method-points">+20积分</text>
+            </view>
+            <view class="method-item">
+              <text class="method-name">新人福利</text>
+              <text class="method-points">+100积分</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="points-card">
+          <view class="points-title">消费积分</view>
+          <view class="points-methods">
+            <view class="method-item">
+              <text class="method-name">批量解析</text>
+              <text class="method-points">-50积分</text>
+            </view>
+            <view class="method-item">
+              <text class="method-name">额外下载次数</text>
+              <text class="method-points">-10积分</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 常见问题 -->
+    <view class="section">
+      <view class="section-title">
+        <t-icon name="info-circle" size="28rpx" color="#ff5722" />
+        <text>常见问题</text>
+      </view>
+      
+      <view class="faq-list">
+        <view class="faq-item">
+          <view class="faq-question">Q: 为什么解析失败？</view>
+          <view class="faq-answer">
+            A: 可能原因：1.链接格式错误 2.视频已被删除或设为私密 3.网络连接不稳定
+          </view>
+        </view>
+
+        <view class="faq-item">
+          <view class="faq-question">Q: 下载的视频保存在哪里？</view>
+          <view class="faq-answer">
+            A: 视频会自动保存到手机相册中，您可以在相册的视频文件夹中找到
+          </view>
+        </view>
+
+        <view class="faq-item">
+          <view class="faq-question">Q: 批量解析功能如何使用？</view>
+          <view class="faq-answer">
+            A: 复制用户主页链接，在批量解析页面粘贴后点击解析，需要消耗50积分
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部提示 -->
+    <view class="footer-tip">
+      <t-icon name="info-circle" size="24rpx" color="#666" />
+      <text>如有其他问题，请联系客服或查看帮助文档</text>
+    </view>
+
+  </scroll-view>
+</view>

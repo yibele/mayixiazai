@@ -1,0 +1,13 @@
+需要在此目录添加以下tabBar图标文件（建议32x32px）：
+
+home.png - 首页图标（未选中状态）
+home_active.png - 首页图标（选中状态）
+
+task.png - 任务图标（未选中状态） 
+task_active.png - 任务图标（选中状态）
+
+profile.png - 我的图标（未选中状态）
+profile_active.png - 我的图标（选中状态）
+
+注意：由于微信小程序要求，图标文件必须是PNG格式，建议尺寸为32x32px或64x64px。
+您可以使用iconfont、阿里巴巴矢量图标库等网站下载合适的图标。

@@ -1,11 +1,8 @@
 <!-- miniprogram/pages/index/index.wxml -->
+
+  <t-navbar title="蚂蚁下载器" fixed />
 <view class="page-container">
   <t-dialog id="t-dialog" />
-
-  <!-- Logo 和标题 -->
-  <view class="header" style="background-image: url('/imgs/logo.png');">
-    <view class="app-title">蚂蚁下载器</view>
-  </view>
 
   <!-- 输入区域 -->
   <view class="input-card">
@@ -15,7 +12,6 @@
       bind:change="onLinkInput"
       placeholder="请在此处粘贴视频或图文分享链接"
       clearable
-      prefix-icon="link"
     />
     <!-- 按钮组 -->
     <view class="button-group">
@@ -50,6 +46,29 @@
     <t-loading text="正在为您努力解析中..." size="40rpx" />
   </view>
 
+  <!-- 功能卡片 -->
+  <view class="feature-cards" wx:if="{{showFeatureCards && !isLoading && !videoInfo}}">
+    <view class="feature-card" bind:tap="goToTextExtract">
+      <view class="card-title">文案提取</view>
+      <view class="card-desc">快速提取视频文案内容</view>
+    </view>
+    
+    <view class="feature-card" bind:tap="goToBatchAnalysis">
+      <view class="card-title">批量解析</view>
+      <view class="card-desc">一键解析用户所有视频</view>
+    </view>
+    
+    <view class="feature-card" bind:tap="goToTutorial">
+      <view class="card-title">使用教程</view>
+      <view class="card-desc">详细使用说明指南</view>
+    </view>
+    
+    <view class="feature-card" bind:tap="shareToFriend">
+      <view class="card-title">分享给朋友</view>
+      <view class="card-desc">邀请好友获得积分奖励</view>
+    </view>
+  </view>
+
   <!-- 解析结果 -->
   <view class="result-card" wx:if="{{!isLoading && videoInfo}}">
     <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
@@ -64,6 +83,10 @@
       <t-button theme="primary" block bind:tap="goToDownload">
         <t-icon name="download" slot="icon"/>
         下载视频
+      </t-button>
+      <t-button theme="default" block bind:tap="copyText" style="margin-top: 16rpx;">
+        <t-icon name="file-copy" slot="icon"/>
+        复制文案
       </t-button>
     </view>
   </view>

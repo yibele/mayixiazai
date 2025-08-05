@@ -1,0 +1,122 @@
+<!-- miniprogram/pages/batchAnalysis/batchAnalysis.wxml -->
+<view class="page-container">
+  <t-dialog id="t-dialog" />
+
+  <!-- TDesign导航栏 -->
+  <t-navbar title="批量解析" left-arrow fixed bind:left-click="goBack" />
+
+  <!-- 功能说明 -->
+  <view class="intro-card">
+    <view class="intro-title">
+      <t-icon name="layers" size="32rpx" color="#1976d2" />
+      <text>批量解析功能</text>
+    </view>
+    <view class="intro-desc">
+      输入用户主页链接，批量解析该用户的所有视频，支持批量下载。
+    </view>
+  </view>
+
+  <!-- 输入区域 -->
+  <view class="input-card">
+    <t-input
+      class="input-field"
+      value="{{profileLink}}"
+      bind:change="onProfileLinkInput"
+      placeholder="请输入用户主页链接"
+      clearable
+      prefix-icon="user"
+    />
+    <!-- 按钮组 -->
+    <view class="button-group">
+      <t-button
+        class="action-btn"
+        theme="primary"
+        loading="{{isLoading}}"
+        bind:tap="startBatchAnalysis"
+      >
+        开始解析
+      </t-button>
+      <t-button
+        class="action-btn"
+        theme="default"
+        bind:tap="pasteFromClipboard"
+      >
+        一键粘贴
+      </t-button>
+    </view>
+  </view>
+
+
+
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <t-loading text="正在解析用户视频..." size="40rpx" />
+    <view class="loading-tip">这可能需要一些时间，请耐心等待</view>
+  </view>
+
+  <!-- 视频列表 -->
+  <view class="video-list" wx:if="{{!isLoading && videoList.length > 0}}">
+    <view class="list-header">
+      <view class="list-title">
+        <text>找到 {{videoList.length}} 个视频</text>
+      </view>
+      <view class="list-actions">
+        <t-button size="small" theme="default" bind:tap="toggleSelectAll">
+          {{isSelectAll ? '取消全选' : '全选'}}
+        </t-button>
+        <t-button 
+          size="small" 
+          theme="primary" 
+          bind:tap="batchDownload"
+          disabled="{{selectedVideos.length === 0}}"
+        >
+          下载选中 ({{selectedVideos.length}})
+        </t-button>
+      </view>
+    </view>
+
+    <view class="video-item" wx:for="{{videoList}}" wx:key="index">
+      <view class="video-checkbox">
+        <t-checkbox
+          value="{{item.selected}}"
+          bind:change="onVideoSelect"
+          data-index="{{index}}"
+        />
+      </view>
+      <t-image class="video-cover" src="{{item.cover}}" mode="aspectFill" />
+      <view class="video-info">
+        <view class="video-title">{{item.title}}</view>
+        <view class="video-meta">
+          <text class="video-date">{{item.publishTime}}</text>
+          <text class="video-stats">{{item.playCount}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{hasMore}}">
+      <t-button 
+        theme="default" 
+        variant="outline" 
+        loading="{{isLoadingMore}}"
+        bind:tap="loadMoreVideos"
+      >
+        {{isLoadingMore ? '加载中...' : '加载更多'}}
+      </t-button>
+    </view>
+  </view>
+
+  <!-- 下载进度 -->
+  <view class="download-progress" wx:if="{{isDownloading}}">
+    <view class="progress-header">
+      <text>正在下载...</text>
+      <text>{{downloadProgress.current}}/{{downloadProgress.total}}</text>
+    </view>
+    <t-progress 
+      percentage="{{downloadProgress.percentage}}" 
+      stroke-width="8rpx"
+      color="#1976d2"
+    />
+    <view class="progress-tip">{{downloadProgress.currentTitle}}</view>
+  </view>
+</view>

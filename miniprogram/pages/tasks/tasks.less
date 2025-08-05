@@ -1,0 +1,195 @@
+/* miniprogram/pages/tasks/tasks.less */
+@import '../../app.less';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+
+
+/* 积分卡片 */
+.points-card {
+  margin: 24rpx 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  color: white;
+  
+  .points-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+    
+    .points-icon {
+      margin-right: 16rpx;
+    }
+    
+    .points-info {
+      flex: 1;
+      
+      .points-title {
+        font-size: 28rpx;
+        opacity: 0.9;
+        margin-bottom: 8rpx;
+      }
+      
+      .points-value {
+        font-size: 48rpx;
+        font-weight: 600;
+        color: #ffd700;
+      }
+    }
+  }
+  
+  .points-desc {
+    font-size: 26rpx;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+}
+
+/* 区域标题 */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin: 32rpx 32rpx 24rpx;
+}
+
+/* 任务区域 */
+.task-section {
+  margin: 0 32rpx;
+  
+  .task-card {
+    background-color: #ffffff;
+    border-radius: 20rpx;
+    padding: 32rpx;
+    margin-bottom: 16rpx;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    
+    &.special-task {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+      color: white;
+      
+      .task-title, .task-desc {
+        color: white;
+      }
+      
+      .task-progress {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+    
+    .task-icon {
+      width: 80rpx;
+      height: 80rpx;
+      background-color: #f8f9fa;
+      border-radius: 16rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 24rpx;
+      
+      .special-task & {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+    
+    .task-content {
+      flex: 1;
+      
+      .task-title {
+        font-size: 30rpx;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8rpx;
+        display: flex;
+        align-items: center;
+        gap: 12rpx;
+        
+        .task-badge {
+          background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+          color: white;
+          font-size: 20rpx;
+          padding: 4rpx 8rpx;
+          border-radius: 8rpx;
+          font-weight: 500;
+        }
+      }
+      
+      .task-desc {
+        font-size: 26rpx;
+        color: #666;
+        margin-bottom: 12rpx;
+        line-height: 1.4;
+      }
+      
+      .task-progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 24rpx;
+        color: #999;
+        
+        .task-reward {
+          color: #1976d2;
+          font-weight: 600;
+          
+          &.big-reward {
+            font-size: 32rpx;
+            color: #ffd700;
+          }
+        }
+      }
+    }
+    
+    .task-action {
+      margin-left: 16rpx;
+    }
+  }
+}
+
+
+
+/* 规则说明 */
+.rules-section {
+  margin: 32rpx 32rpx 0;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  
+  .rules-title {
+    display: flex;
+    align-items: center;
+    gap: 8rpx;
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 16rpx;
+  }
+  
+  .rules-content {
+    text {
+      display: block;
+      font-size: 24rpx;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 8rpx;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

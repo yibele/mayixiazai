@@ -16,6 +16,7 @@ Page({
     link: '',
     isLoading: false,
     videoInfo: null as VideoInfo | null,
+    showFeatureCards: true, // 明确控制功能卡片显示
     // videoInfo: {
     //   cover: 'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg',
     //   title: '这是一个示例视频标题，这是一个示例视频标题，这是一个示例视频标题',
@@ -26,12 +27,24 @@ Page({
   },
 
   onLoad() {
-    // 可以在这里添加一些初始化逻辑
+    // 调试：打印当前数据状态
+    console.log('页面数据状态:', {
+      isLoading: this.data.isLoading,
+      videoInfo: this.data.videoInfo,
+      shouldShowCards: !this.data.isLoading && !this.data.videoInfo
+    });
   },
 
   onShow() {
     // 每次页面显示时，检查剪贴板内容
-    this.checkClipboard();
+    // this.checkClipboard();
+    
+    // 确保功能卡片状态正确
+    if (!this.data.isLoading && !this.data.videoInfo) {
+      this.setData({
+        showFeatureCards: true
+      });
+    }
   },
 
   checkClipboard() {
@@ -66,7 +79,8 @@ Page({
   clearInput() {
     this.setData({
       link: '',
-      videoInfo: null
+      videoInfo: null,
+      showFeatureCards: true
     });
     wx.showToast({
       title: '已清空',
@@ -116,7 +130,11 @@ Page({
       return;
     }
 
-    this.setData({ isLoading: true, videoInfo: null });
+    this.setData({ 
+      isLoading: true, 
+      videoInfo: null,
+      showFeatureCards: false 
+    });
 
     console.log('开始分析链接:', this.data.link);
 
@@ -133,7 +151,8 @@ Page({
         // 解析成功
         this.setData({
           isLoading: false,
-          videoInfo: result.result.data
+          videoInfo: result.result.data,
+          showFeatureCards: false
         });
         wx.showToast({
           title: '解析成功！',
@@ -142,7 +161,10 @@ Page({
         });
       } else {
         // 解析失败
-        this.setData({ isLoading: false });
+        this.setData({ 
+          isLoading: false,
+          showFeatureCards: true 
+        });
         wx.showToast({
           title: result.result.error || '解析失败，请检查链接或稍后再试',
           icon: 'error',
@@ -151,7 +173,10 @@ Page({
       }
     }).catch((error: any) => {
       console.error('云函数调用失败:', error);
-      this.setData({ isLoading: false });
+      this.setData({ 
+        isLoading: false,
+        showFeatureCards: true 
+      });
       wx.showToast({
         title: '网络错误，请稍后再试',
         icon: 'error',
@@ -178,5 +203,80 @@ Page({
     });
   },
 
+  // 复制文案
+  copyText() {
+    if (!this.data.videoInfo?.caption) {
+      wx.showToast({
+        title: '暂无文案内容',
+        icon: 'error',
+        duration: 2000
+      });
+      return;
+    }
 
+    wx.setClipboardData({
+      data: this.data.videoInfo.caption,
+      success: () => {
+        wx.showToast({
+          title: '文案已复制到剪贴板',
+          icon: 'success',
+          duration: 2000
+        });
+      },
+      fail: () => {
+        wx.showToast({
+          title: '复制失败，请稍后再试',
+          icon: 'error',
+          duration: 2000
+        });
+      }
+    });
+  },
+
+  // 功能卡片导航方法
+  goToTextExtract() {
+    wx.navigateTo({
+      url: '/pages/textExtract/textExtract'
+    });
+  },
+
+  goToBatchAnalysis() {
+    wx.navigateTo({
+      url: '/pages/batchAnalysis/batchAnalysis'
+    });
+  },
+
+  goToTutorial() {
+    wx.navigateTo({
+      url: '/pages/tutorial/tutorial'
+    });
+  },
+
+  shareToFriend() {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    });
+    
+    wx.showToast({
+      title: '点击右上角分享给朋友',
+      icon: 'none',
+      duration: 2000
+    });
+  },
+
+  // 微信分享配置
+  onShareAppMessage() {
+    return {
+      title: '蚂蚁下载器 - 免费下载无水印视频',
+      path: '/pages/index/index',
+      imageUrl: '/imgs/logo.png'
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: '蚂蚁下载器 - 免费下载无水印视频'
+    };
+  }
 });

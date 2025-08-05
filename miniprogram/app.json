@@ -1,11 +1,43 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/download/download"
+    "pages/download/download",
+    "pages/textExtract/textExtract",
+    "pages/batchAnalysis/batchAnalysis",
+    "pages/tutorial/tutorial",
+    "pages/profile/profile",
+    "pages/tasks/tasks"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "#666666",
+    "selectedColor": "#1976d2",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "imgs/home.png",
+        "selectedIconPath": "imgs/home_active.png"
+      },
+      {
+        "pagePath": "pages/tasks/tasks",
+        "text": "任务",
+        "iconPath": "imgs/task.png",
+        "selectedIconPath": "imgs/task_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "imgs/profile.png",
+        "selectedIconPath": "imgs/profile_active.png"
+      }
+    ]
   },
   "rendererOptions": {
     "skyline": {

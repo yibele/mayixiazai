@@ -1,0 +1,127 @@
+<!-- miniprogram/pages/tasks/tasks.wxml -->
+<view class="page-container">
+  <!-- TDesign导航栏 -->
+  <t-navbar title="任务中心" fixed />
+
+  <!-- 积分余额卡片 -->
+  <view class="points-card">
+    <view class="points-header">
+      <view class="points-icon">
+        <t-icon name="wallet" size="48rpx" color="#ffd700" />
+      </view>
+      <view class="points-info">
+        <view class="points-title">当前积分</view>
+        <view class="points-value">{{userPoints}}</view>
+      </view>
+      <view class="points-action">
+        <t-button size="small" theme="primary" variant="outline" bind:tap="goToPointsHistory">
+          明细
+        </t-button>
+      </view>
+    </view>
+    <view class="points-desc">
+      完成任务获得积分，可用于兑换VIP功能和额外下载次数
+    </view>
+  </view>
+
+  <!-- 任务列表 -->
+  <view class="task-section">
+    <view class="section-title">
+      <t-icon name="gift" size="28rpx" color="#1976d2" />
+      <text>每日任务</text>
+    </view>
+
+    <!-- 观看广告任务 -->
+    <view class="task-card">
+      <view class="task-icon">
+        <t-icon name="play-circle" size="40rpx" color="#4caf50" />
+      </view>
+      <view class="task-content">
+        <view class="task-title">观看激励广告</view>
+        <view class="task-desc">观看完整广告视频获得积分奖励</view>
+        <view class="task-progress">
+          <text>今日进度：{{adTaskProgress}}/{{adTaskLimit}}</text>
+          <text class="task-reward">+10积分</text>
+        </view>
+      </view>
+      <view class="task-action">
+        <t-button 
+          size="small" 
+          theme="primary"
+          bind:tap="watchAd"
+          disabled="{{adTaskProgress >= adTaskLimit}}"
+        >
+          {{adTaskProgress >= adTaskLimit ? '已完成' : '观看广告'}}
+        </t-button>
+      </view>
+    </view>
+
+    <!-- 邀请好友任务 -->
+    <view class="task-card">
+      <view class="task-icon">
+        <t-icon name="user-add" size="40rpx" color="#ff9800" />
+      </view>
+      <view class="task-content">
+        <view class="task-title">邀请新用户</view>
+        <view class="task-desc">邀请好友使用小程序并完成一次解析</view>
+        <view class="task-progress">
+          <text>累计邀请：{{inviteCount}}人</text>
+          <text class="task-reward">+20积分/人</text>
+        </view>
+      </view>
+      <view class="task-action">
+        <t-button 
+          size="small" 
+          theme="primary"
+          variant="outline"
+          bind:tap="inviteFriend"
+        >
+          立即邀请
+        </t-button>
+      </view>
+    </view>
+
+    <!-- 新人福利 -->
+    <view class="task-card special-task">
+      <view class="task-icon">
+        <t-icon name="star" size="40rpx" color="#e91e63" />
+      </view>
+      <view class="task-content">
+        <view class="task-title">
+          <text>新用户福利</text>
+          <view class="task-badge">限时</view>
+        </view>
+        <view class="task-desc">首次登录即可获得丰厚积分奖励</view>
+        <view class="task-progress">
+          <text class="task-reward big-reward">+100积分</text>
+        </view>
+      </view>
+      <view class="task-action">
+        <t-button 
+          size="small" 
+          theme="primary"
+          bind:tap="claimNewUserBonus"
+          disabled="{{hasClaimedNewUserBonus}}"
+        >
+          {{hasClaimedNewUserBonus ? '已领取' : '立即领取'}}
+        </t-button>
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 任务规则 -->
+  <view class="rules-section">
+    <view class="rules-title">
+      <t-icon name="info-circle" size="24rpx" color="#666" />
+      <text>任务规则</text>
+    </view>
+    <view class="rules-content">
+      <text>1. 每日观看广告任务最多完成5次</text>
+      <text>2. 邀请好友需要好友完成一次有效解析才能获得奖励</text>
+      <text>3. 新用户福利仅限首次登录领取</text>
+      <text>4. 积分不可转让，请合理使用</text>
+    </view>
+  </view>
+</view>

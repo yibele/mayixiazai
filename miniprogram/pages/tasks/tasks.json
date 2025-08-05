@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+
+  },
+  "navigationBarTitleText": "任务中心"
+}

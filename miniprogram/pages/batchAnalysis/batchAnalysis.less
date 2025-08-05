@@ -1,0 +1,203 @@
+/* miniprogram/pages/batchAnalysis/batchAnalysis.less */
+@import '../../app.less';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-bottom: 20rpx;
+}
+
+
+
+/* 功能介绍卡片 */
+.intro-card {
+  margin: 24rpx 32rpx;
+  padding: 32rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  
+  .intro-title {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16rpx;
+  }
+  
+  .intro-desc {
+    font-size: 28rpx;
+    color: #666;
+    line-height: 1.5;
+  }
+}
+
+/* 输入卡片 */
+.input-card {
+  margin: 0 32rpx 24rpx;
+  padding: 32rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  
+  .input-field {
+    margin-bottom: 32rpx;
+    --td-input-border-color: #e7e7e7;
+    --td-input-bg-color: #f9f9f9;
+    --td-input-border-radius: 16rpx;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 16rpx;
+    
+    .action-btn {
+      flex: 1;
+      --td-button-border-radius: 16rpx;
+      --td-button-primary-bg-color: @primary-color;
+      --td-button-primary-border-color: @primary-color;
+      --td-button-height: 88rpx;
+      font-size: 28rpx;
+      font-weight: 500;
+    }
+  }
+}
+
+
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+  
+  .loading-tip {
+    margin-top: 24rpx;
+    font-size: 26rpx;
+    color: #888;
+  }
+}
+
+/* 视频列表 */
+.video-list {
+  margin: 0 32rpx;
+  
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24rpx 0;
+    
+    .list-title {
+      font-size: 30rpx;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .list-actions {
+      display: flex;
+      gap: 12rpx;
+    }
+  }
+  
+  .video-item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx;
+    background-color: #ffffff;
+    border-radius: 16rpx;
+    margin-bottom: 16rpx;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    
+    .video-checkbox {
+      margin-right: 16rpx;
+    }
+    
+    .video-cover {
+      width: 120rpx;
+      height: 80rpx;
+      border-radius: 8rpx;
+      margin-right: 16rpx;
+    }
+    
+    .video-info {
+      flex: 1;
+      
+      .video-title {
+        font-size: 28rpx;
+        color: #333;
+        font-weight: 500;
+        margin-bottom: 8rpx;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.4;
+      }
+      
+      .video-meta {
+        display: flex;
+        gap: 16rpx;
+        font-size: 22rpx;
+        color: #666;
+        
+        .video-date, .video-stats {
+          &::before {
+            content: '·';
+            margin-right: 8rpx;
+          }
+          
+          &:first-child::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  
+  .load-more {
+    display: flex;
+    justify-content: center;
+    padding: 32rpx 0;
+  }
+}
+
+/* 下载进度 */
+.download-progress {
+  position: fixed;
+  bottom: 120rpx;
+  left: 32rpx;
+  right: 32rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16rpx;
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .progress-tip {
+    margin-top: 16rpx;
+    font-size: 24rpx;
+    color: #666;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
