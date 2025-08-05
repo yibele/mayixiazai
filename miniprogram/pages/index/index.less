@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   padding: 40rpx 32rpx;
+  padding-top: calc(40rpx + env(safe-area-inset-top)); // 添加安全区适配
   box-sizing: border-box;
   background-color: #f8f9fa; // 更柔和的背景色
   min-height: 100vh;
@@ -149,24 +150,11 @@
   }
 
   .action-buttons {
-    display: flex;
-    gap: 24rpx;
     padding: 0 24rpx 24rpx;
   }
 }
 
-.history-entry {
-  margin-top: 40rpx;
-  color: #888;
-  font-size: 26rpx;
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-  padding: 10rpx 20rpx;
-  border-radius: 30rpx;
-  background: #fff;
-  border: 1px solid #eee;
-}
+
 
 .page-footer {
   position: fixed;

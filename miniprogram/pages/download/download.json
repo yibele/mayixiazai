@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-footer": "tdesign-miniprogram/footer/footer"
+  },
+  "navigationBarTitleText": "下载详情"
+}

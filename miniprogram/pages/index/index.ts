@@ -8,6 +8,7 @@ interface VideoInfo {
   author: string;
   authorAvatar: string;
   caption: string;
+  downloadUrl: string; // 添加视频下载链接
 }
 
 Page({
@@ -117,26 +118,22 @@ Page({
 
     this.setData({ isLoading: true, videoInfo: null });
 
-    // --- 模拟后端API调用 ---
-    // 在实际开发中，您应该在这里调用云函数
-    // wx.cloud.callFunction({ name: 'parseVideo', data: { link: this.data.link } })
     console.log('开始分析链接:', this.data.link);
 
-    setTimeout(() => {
-      // 模拟成功或失败
-      const isSuccess = Math.random() > 0.2; // 80%成功率
-
-      if (isSuccess) {
-        // 模拟成功返回的数据
+    // 调用云函数解析视频
+    wx.cloud.callFunction({
+      name: 'parseVideo',
+      data: {
+        link: this.data.link
+      }
+    }).then((result: any) => {
+      console.log('云函数返回结果:', result);
+      
+      if (result.result.success) {
+        // 解析成功
         this.setData({
           isLoading: false,
-          videoInfo: {
-            cover: 'https://img.zcool.cn/community/017a715c8f19f0a801214168c39713.jpg@1280w_1l_2o_100sh.jpg',
-            title: '【模拟数据】风景如画，感受大自然的鬼斧神工！',
-            author: '旅行摄影师',
-            authorAvatar: 'https://pic.qqtn.com/up/2018-1-24/15167598424698395.jpg',
-            caption: '【模拟文案】这趟旅行，我被大自然的壮丽景色深深震撼。每一帧都是一幅画，希望你也喜欢。 #旅行 #风景 #摄影'
-          }
+          videoInfo: result.result.data
         });
         wx.showToast({
           title: '解析成功！',
@@ -144,58 +141,42 @@ Page({
           duration: 2000
         });
       } else {
-        // 模拟失败
+        // 解析失败
         this.setData({ isLoading: false });
         wx.showToast({
-          title: '解析失败，请检查链接或稍后再试',
+          title: result.result.error || '解析失败，请检查链接或稍后再试',
           icon: 'error',
           duration: 2500
         });
       }
-    }, 1500); // 模拟1.5秒的网络延迟
-  },
-
-  // 下载视频
-  downloadVideo() {
-    wx.showToast({
-      title: '已开始下载，请留意授权提示',
-      icon: 'success',
-      duration: 2000
-    });
-    // 在这里添加调用 wx.saveVideoToPhotosAlbum 的逻辑
-    // wx.showLoading({ title: '下载中...' });
-    // wx.downloadFile({
-    //   url: '模拟的视频URL',
-    //   success(res) {
-    //     wx.saveVideoToPhotosAlbum({
-    //       filePath: res.tempFilePath,
-    //       success() { wx.hideLoading(); Toast(...) },
-    //       fail() { wx.hideLoading(); Toast(...) }
-    //     })
-    //   }
-    // })
-  },
-
-  // 复制文案
-  copyCaption() {
-    if (this.data.videoInfo && this.data.videoInfo.caption) {
-      wx.setClipboardData({
-        data: this.data.videoInfo.caption,
-        success: () => {
-          wx.showToast({
-            title: '文案已复制',
-            icon: 'success',
-            duration: 2000
-          });
-        },
+    }).catch((error: any) => {
+      console.error('云函数调用失败:', error);
+      this.setData({ isLoading: false });
+      wx.showToast({
+        title: '网络错误，请稍后再试',
+        icon: 'error',
+        duration: 2500
       });
-    }
+    });
   },
 
-  // 跳转到历史记录页
-  navigateToHistory() {
+  // 跳转到下载页面
+  goToDownload() {
+    if (!this.data.videoInfo) {
+      wx.showToast({
+        title: '请先解析视频',
+        icon: 'error',
+        duration: 2000
+      });
+      return;
+    }
+
+    // 将视频信息传递到下载页面
+    const videoData = encodeURIComponent(JSON.stringify(this.data.videoInfo));
     wx.navigateTo({
-      url: '/pages/history/history', // 假设历史记录页面路径
+      url: `/pages/download/download?videoData=${videoData}`
     });
-  }
+  },
+
+
 });

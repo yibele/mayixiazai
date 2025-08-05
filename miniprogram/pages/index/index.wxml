@@ -61,22 +61,14 @@
       </view>
     </view>
     <view class="action-buttons">
-      <t-button theme="primary" variant="outline" block bind:tap="copyCaption">
-        <t-icon name="file-copy" slot="icon"/>
-        复制文案
-      </t-button>
-      <t-button theme="primary" block bind:tap="downloadVideo">
+      <t-button theme="primary" block bind:tap="goToDownload">
         <t-icon name="download" slot="icon"/>
         下载视频
       </t-button>
     </view>
   </view>
 
-  <!-- 历史记录入口 -->
-  <view class="history-entry" bind:tap="navigateToHistory">
-    <t-icon name="history" />
-    <text>解析历史</text>
-  </view>
+
 
   <!-- 页脚 -->
   <t-footer

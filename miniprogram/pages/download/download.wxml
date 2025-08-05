@@ -1,0 +1,89 @@
+<!-- miniprogram/pages/download/download.wxml -->
+<view class="page-container">
+  
+  <!-- 视频信息展示 -->
+  <view class="video-info-card">
+    <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
+    <view class="video-details">
+      <view class="video-title">{{videoInfo.title}}</view>
+      <view class="author-info">
+        <t-avatar size="small" image="{{videoInfo.authorAvatar}}" />
+        <view class="author-name">{{videoInfo.author}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能按钮区域 -->
+  <view class="action-section">
+    <view class="section-title">下载操作</view>
+    
+    <!-- 下载视频按钮 -->
+    <t-button 
+      class="action-button primary-btn" 
+      theme="primary" 
+      block 
+      bind:tap="downloadVideo"
+    >
+      <t-icon name="download" slot="icon"/>
+      下载视频到相册
+    </t-button>
+
+    <!-- 复制链接按钮组 -->
+    <view class="copy-buttons">
+      <t-button 
+        class="action-button copy-btn" 
+        theme="default" 
+        block 
+        bind:tap="copyVideoUrl"
+      >
+        <t-icon name="link" slot="icon"/>
+        复制无水印链接
+      </t-button>
+
+      <t-button 
+        class="action-button copy-btn" 
+        theme="default" 
+        block 
+        bind:tap="copyCoverUrl"
+      >
+        <t-icon name="image" slot="icon"/>
+        复制封面链接
+      </t-button>
+
+      <t-button 
+        class="action-button copy-btn" 
+        theme="default" 
+        block 
+        bind:tap="copyTitle"
+      >
+        <t-icon name="file-copy" slot="icon"/>
+        复制标题文案
+      </t-button>
+    </view>
+  </view>
+
+  <!-- 温馨提示 -->
+  <view class="tips-section">
+    <t-divider content="温馨提示" />
+    <view class="tips-content">
+      <view class="tip-item">
+        <t-icon name="info-circle" size="16px" />
+        <text>如果视频无法直接下载到相册，说明该视频域名不在小程序白名单中</text>
+      </view>
+      <view class="tip-item">
+        <t-icon name="bulletpoint" size="16px" />
+        <text>您可以点击"复制无水印链接"，然后在浏览器中打开进行下载</text>
+      </view>
+      <view class="tip-item">
+        <t-icon name="heart" size="16px" />
+        <text>我们会持续完善白名单，为您提供更好的下载体验</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 页脚 -->
+  <t-footer
+    class="page-footer"
+    text="本服务仅供个人学习与收藏，请勿用于商业用途。"
+  ></t-footer>
+</view>
