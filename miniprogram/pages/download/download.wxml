@@ -1,25 +1,29 @@
+
+  <t-navbar title="视频下载" left-arrow fixed bind:left-click="goBack" />
 <!-- miniprogram/pages/download/download.wxml -->
 <view class="page-container">
-  
+
   <!-- 视频信息展示 -->
   <view class="video-info-card">
-    <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
+    <video 
+      class="video-player" 
+      src="{{videoInfo.downloadUrl}}" 
+      poster="{{videoInfo.cover}}"
+      show-play-btn="{{true}}"
+      show-center-play-btn="{{true}}"
+      controls="{{true}}"
+      object-fit="contain"
+    ></video>
     <view class="video-details">
       <view class="video-title">{{videoInfo.title}}</view>
-      <view class="author-info">
-        <t-avatar size="small" image="{{videoInfo.authorAvatar}}" />
-        <view class="author-name">{{videoInfo.author}}</view>
-      </view>
     </view>
   </view>
 
   <!-- 功能按钮区域 -->
   <view class="action-section">
-    <view class="section-title">下载操作</view>
-    
-    <!-- 下载视频按钮 -->
+    <!-- 主要操作按钮 - 横向完整宽度 -->
     <t-button 
-      class="action-button primary-btn" 
+      class="action-button main-btn" 
       theme="primary" 
       block 
       bind:tap="downloadVideo"
@@ -28,36 +32,34 @@
       下载视频到相册
     </t-button>
 
-    <!-- 复制链接按钮组 -->
-    <view class="copy-buttons">
-      <t-button 
-        class="action-button copy-btn" 
-        theme="default" 
-        block 
-        bind:tap="copyVideoUrl"
-      >
-        <t-icon name="link" slot="icon"/>
-        复制无水印链接
-      </t-button>
+    <t-button 
+      class="action-button main-btn" 
+      theme="default" 
+      block 
+      bind:tap="copyVideoUrl"
+    >
+      <t-icon name="link" slot="icon"/>
+      复制无水印链接
+    </t-button>
 
+    <!-- 次要操作按钮 - 两个并排 -->
+    <view class="secondary-buttons">
       <t-button 
-        class="action-button copy-btn" 
+        class="action-button secondary-btn" 
         theme="default" 
-        block 
         bind:tap="copyCoverUrl"
       >
         <t-icon name="image" slot="icon"/>
-        复制封面链接
+        复制封面
       </t-button>
 
       <t-button 
-        class="action-button copy-btn" 
+        class="action-button secondary-btn" 
         theme="default" 
-        block 
         bind:tap="copyTitle"
       >
         <t-icon name="file-copy" slot="icon"/>
-        复制标题文案
+        复制标题
       </t-button>
     </view>
   </view>

@@ -80,51 +80,80 @@
   }
 }
 
-/* 解析结果卡片 */
-.result-card {
-  margin: 24rpx 32rpx 0;
-  background-color: #ffffff;
-  border-radius: 20rpx;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  animation: fadeIn 0.5s ease-in-out;
-
-  .video-cover {
-    width: 100%;
-    height: 400rpx;
+/* 解析结果弹窗样式 */
+.result-popup {
+  .popup-content {
+    background-color: #ffffff;
+    border-radius: 32rpx 32rpx 0 0;
+    max-height: 80vh;
+    overflow: hidden;
   }
-
-  .video-details {
-    padding: 24rpx;
-
-    .video-title {
-      font-size: 30rpx;
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32rpx 32rpx 16rpx;
+    border-bottom: 1px solid #f0f0f0;
+    
+    .popup-title {
+      font-size: 32rpx;
       font-weight: 600;
       color: #333;
-      white-space: pre-wrap;
-      word-break: break-all;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 16rpx;
     }
-
-    .author-info {
-      display: flex;
-      align-items: center;
-      
-      .author-name {
-        margin-left: 12rpx;
-        font-size: 26rpx;
-        color: #666;
-      }
+    
+    .close-icon {
+      font-size: 40rpx;
+      color: #999;
+      padding: 8rpx;
     }
   }
+  
+  .result-card {
+    margin: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    animation: none;
 
-  .action-buttons {
-    padding: 0 24rpx 24rpx;
+    .video-cover {
+      width: 100%;
+      height: 400rpx;
+    }
+
+    .video-details {
+      padding: 24rpx;
+
+      .video-title {
+        font-size: 30rpx;
+        font-weight: 600;
+        color: #333;
+        white-space: pre-wrap;
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 16rpx;
+      }
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        
+        .author-name {
+          margin-left: 12rpx;
+          font-size: 26rpx;
+          color: #666;
+        }
+      }
+    }
+
+    .action-buttons {
+      padding: 0 24rpx 24rpx;
+    }
   }
 }
 

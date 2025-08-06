@@ -5,7 +5,8 @@
     "t-avatar": "tdesign-miniprogram/avatar/avatar",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-divider": "tdesign-miniprogram/divider/divider",
-    "t-footer": "tdesign-miniprogram/footer/footer"
+    "t-footer": "tdesign-miniprogram/footer/footer",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   },
   "navigationBarTitleText": "下载详情"
 }

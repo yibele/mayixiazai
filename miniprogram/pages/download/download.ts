@@ -45,6 +45,11 @@ Page({
     }
   },
 
+  // 返回上一页
+  goBack() {
+    wx.navigateBack();
+  },
+
   // 下载视频到相册
   downloadVideo() {
     if (!this.data.videoInfo || !this.data.videoInfo.downloadUrl) {

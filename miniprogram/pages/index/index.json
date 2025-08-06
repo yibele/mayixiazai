@@ -9,6 +9,7 @@
     "t-footer": "tdesign-miniprogram/footer/footer",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-popup": "tdesign-miniprogram/popup/popup"
   }
 }

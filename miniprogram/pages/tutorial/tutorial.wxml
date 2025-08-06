@@ -1,16 +1,13 @@
 <!-- miniprogram/pages/tutorial/tutorial.wxml -->
+  <t-navbar title="使用教程" left-arrow fixed bind:left-click="goBack" />
 <view class="page-container">
   <!-- TDesign导航栏 -->
-  <t-navbar title="使用教程" left-arrow fixed bind:left-click="goBack" />
 
   <!-- 教程内容 -->
   <scroll-view class="tutorial-content" scroll-y enhanced>
-    
+  <view class="tutorial-content-inner">
     <!-- 欢迎卡片 -->
     <view class="welcome-card">
-      <view class="welcome-icon">
-        <t-icon name="help-circle" size="64rpx" color="#1976d2" />
-      </view>
       <view class="welcome-title">欢迎使用蚂蚁下载器</view>
       <view class="welcome-desc">
         一款专业的无水印视频下载工具，支持抖音、快手、小红书、B站等主流平台
@@ -108,7 +105,7 @@
 
         <view class="feature-item">
           <view class="feature-icon">
-            <t-icon name="file-text" size="32rpx" color="#4caf50" />
+            <t-icon name="filter-1" size="32rpx" color="#4caf50" />
           </view>
           <view class="feature-info">
             <view class="feature-name">文案提取</view>
@@ -124,7 +121,6 @@
             <view class="feature-name">批量解析</view>
             <view class="feature-desc">解析用户主页所有视频，支持批量下载</view>
           </view>
-          <view class="feature-badge">VIP</view>
         </view>
       </view>
     </view>
@@ -142,11 +138,11 @@
           <view class="points-methods">
             <view class="method-item">
               <text class="method-name">观看广告</text>
-              <text class="method-points">+10积分</text>
+              <text class="method-points">+50积分</text>
             </view>
             <view class="method-item">
               <text class="method-name">邀请好友</text>
-              <text class="method-points">+20积分</text>
+              <text class="method-points">+80积分</text>
             </view>
             <view class="method-item">
               <text class="method-name">新人福利</text>
@@ -160,7 +156,7 @@
           <view class="points-methods">
             <view class="method-item">
               <text class="method-name">批量解析</text>
-              <text class="method-points">-50积分</text>
+              <text class="method-points">-10积分</text>
             </view>
             <view class="method-item">
               <text class="method-name">额外下载次数</text>
@@ -196,7 +192,7 @@
         <view class="faq-item">
           <view class="faq-question">Q: 批量解析功能如何使用？</view>
           <view class="faq-answer">
-            A: 复制用户主页链接，在批量解析页面粘贴后点击解析，需要消耗50积分
+            A: 复制用户主页链接，在批量解析页面粘贴后点击解析，需要消耗10积分
           </view>
         </view>
       </view>
@@ -207,6 +203,6 @@
       <t-icon name="info-circle" size="24rpx" color="#666" />
       <text>如有其他问题，请联系客服或查看帮助文档</text>
     </view>
-
+  </view>
   </scroll-view>
 </view>

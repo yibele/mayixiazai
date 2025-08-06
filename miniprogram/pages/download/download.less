@@ -20,7 +20,7 @@
   overflow: hidden;
   margin-bottom: 32rpx;
 
-  .video-cover {
+  .video-player {
     width: 100%;
     height: 400rpx;
   }
@@ -72,32 +72,42 @@
   }
 
   .action-button {
-    margin-bottom: 20rpx;
     --td-button-border-radius: 16rpx;
     --td-button-height: 88rpx;
     font-size: 28rpx;
     font-weight: 500;
 
-    &.primary-btn {
-      --td-button-primary-bg-color: @primary-color;
-      --td-button-primary-border-color: @primary-color;
-      margin-bottom: 32rpx;
+    &.main-btn {
+      margin-bottom: 20rpx;
+      
+      &:first-of-type {
+        --td-button-primary-bg-color: @primary-color;
+        --td-button-primary-border-color: @primary-color;
+      }
+      
+      &:last-of-type {
+        --td-button-default-bg-color: #f8f9fa;
+        --td-button-default-border-color: #e7e7e7;
+        --td-button-default-color: #666;
+        margin-bottom: 32rpx;
+      }
     }
 
-    &.copy-btn {
+    &.secondary-btn {
       --td-button-default-bg-color: #f8f9fa;
       --td-button-default-border-color: #e7e7e7;
       --td-button-default-color: #666;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
+      font-size: 26rpx;
     }
   }
 
-  .copy-buttons {
+  // 次要按钮并排布局
+  .secondary-buttons {
+    display: flex;
+    gap: 16rpx;
+    
     .action-button {
-      margin-bottom: 16rpx;
+      flex: 1;
     }
   }
 }

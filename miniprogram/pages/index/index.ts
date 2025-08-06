@@ -17,6 +17,7 @@ Page({
     isLoading: false,
     videoInfo: null as VideoInfo | null,
     showFeatureCards: true, // 明确控制功能卡片显示
+    showResultPopup: false, // 控制解析结果弹窗显示
     // videoInfo: {
     //   cover: 'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg',
     //   title: '这是一个示例视频标题，这是一个示例视频标题，这是一个示例视频标题',
@@ -80,7 +81,8 @@ Page({
     this.setData({
       link: '',
       videoInfo: null,
-      showFeatureCards: true
+      showFeatureCards: true,
+      showResultPopup: false
     });
     wx.showToast({
       title: '已清空',
@@ -133,7 +135,8 @@ Page({
     this.setData({ 
       isLoading: true, 
       videoInfo: null,
-      showFeatureCards: false 
+      showFeatureCards: false,
+      showResultPopup: false
     });
 
     console.log('开始分析链接:', this.data.link);
@@ -152,7 +155,8 @@ Page({
         this.setData({
           isLoading: false,
           videoInfo: result.result.data,
-          showFeatureCards: false
+          showFeatureCards: false,
+          showResultPopup: true // 显示解析结果弹窗
         });
         wx.showToast({
           title: '解析成功！',
@@ -163,7 +167,8 @@ Page({
         // 解析失败
         this.setData({ 
           isLoading: false,
-          showFeatureCards: true 
+          showFeatureCards: true,
+          showResultPopup: false
         });
         wx.showToast({
           title: result.result.error || '解析失败，请检查链接或稍后再试',
@@ -175,7 +180,8 @@ Page({
       console.error('云函数调用失败:', error);
       this.setData({ 
         isLoading: false,
-        showFeatureCards: true 
+        showFeatureCards: true,
+        showResultPopup: false
       });
       wx.showToast({
         title: '网络错误，请稍后再试',
@@ -183,6 +189,26 @@ Page({
         duration: 2500
       });
     });
+  },
+
+  // 弹窗控制方法
+  hideResultPopup() {
+    this.setData({
+      showResultPopup: false,
+      showFeatureCards: true
+    });
+  },
+
+  onResultPopupVisibleChange(e: WechatMiniprogram.CustomEvent) {
+    this.setData({
+      showResultPopup: e.detail.visible
+    });
+    // 当弹窗关闭时，重新显示功能卡片
+    if (!e.detail.visible) {
+      this.setData({
+        showFeatureCards: true
+      });
+    }
   },
 
   // 跳转到下载页面

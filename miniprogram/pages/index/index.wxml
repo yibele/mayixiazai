@@ -41,13 +41,8 @@
     </view>
   </view>
 
-  <!-- 加载状态 -->
-  <view class="loading-container" wx:if="{{isLoading}}">
-    <t-loading text="正在为您努力解析中..." size="40rpx" />
-  </view>
-
   <!-- 功能卡片 -->
-  <view class="feature-cards" wx:if="{{showFeatureCards && !isLoading && !videoInfo}}">
+  <view class="feature-cards">
     <view class="feature-card" bind:tap="goToTextExtract">
       <view class="card-title">文案提取</view>
       <view class="card-desc">快速提取视频文案内容</view>
@@ -69,27 +64,42 @@
     </view>
   </view>
 
-  <!-- 解析结果 -->
-  <view class="result-card" wx:if="{{!isLoading && videoInfo}}">
-    <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
-    <view class="video-details">
-      <view class="video-title">{{videoInfo.title}}</view>
-      <view class="author-info">
-        <t-avatar size="small" image="{{videoInfo.authorAvatar}}" />
-        <view class="author-name">{{videoInfo.author}}</view>
+  <!-- 解析结果弹窗 -->
+  <t-popup 
+    visible="{{showResultPopup}}" 
+    bind:visible-change="onResultPopupVisibleChange"
+    placement="bottom" 
+    close-on-overlay-click="{{true}}"
+    class="result-popup"
+  >
+    <view class="popup-content">
+      <view class="popup-header">
+        <view class="popup-title">解析结果</view>
+        <t-icon name="close" class="close-icon" bind:tap="hideResultPopup" />
+      </view>
+      
+      <view class="result-card">
+        <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
+        <view class="video-details">
+          <view class="video-title">{{videoInfo.title}}</view>
+          <view class="author-info">
+            <t-avatar size="small" image="{{videoInfo.authorAvatar}}" />
+            <view class="author-name">{{videoInfo.author}}</view>
+          </view>
+        </view>
+        <view class="action-buttons">
+          <t-button theme="primary" block bind:tap="goToDownload">
+            <t-icon name="download" slot="icon"/>
+            下载视频
+          </t-button>
+          <t-button theme="default" block bind:tap="copyText" style="margin-top: 16rpx;">
+            <t-icon name="file-copy" slot="icon"/>
+            复制文案
+          </t-button>
+        </view>
       </view>
     </view>
-    <view class="action-buttons">
-      <t-button theme="primary" block bind:tap="goToDownload">
-        <t-icon name="download" slot="icon"/>
-        下载视频
-      </t-button>
-      <t-button theme="default" block bind:tap="copyText" style="margin-top: 16rpx;">
-        <t-icon name="file-copy" slot="icon"/>
-        复制文案
-      </t-button>
-    </view>
-  </view>
+  </t-popup>
 
 
 
