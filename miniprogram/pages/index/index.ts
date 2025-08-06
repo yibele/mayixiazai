@@ -1,5 +1,6 @@
 // miniprogram/pages/index/index.ts
 import Dialog from 'tdesign-miniprogram/dialog/index';
+import userManager from '../../utils/userManager';
 
 // 定义视频信息接口
 interface VideoInfo {
@@ -122,13 +123,20 @@ Page({
   },
 
   // 核心：开始分析
-  startParse() {
+  async startParse() {
     if (!this.data.link.trim()) {
       wx.showToast({
         title: '请输入链接后再试',
         icon: 'error',
         duration: 2000
       });
+      return;
+    }
+
+    // 检查用户权限（免费次数或积分）
+    const canUse = await userManager.ensureCanUseFeature('video_parse', 0);
+    if (!canUse) {
+      console.log('用户权限不足，取消解析');
       return;
     }
 

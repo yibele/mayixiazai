@@ -5,7 +5,7 @@
   <!-- TDesign导航栏 -->
   <t-navbar title="文案提取" left-arrow fixed bind:left-click="goBack" />
 
-  <!-- 功能说明 -->
+  <!-- 功能说明和用户状态 -->
   <view class="intro-card">
     <view class="intro-title">
       <t-icon name="file-text" size="32rpx" color="#1976d2" />
@@ -13,6 +13,18 @@
     </view>
     <view class="intro-desc">
       输入视频链接，快速提取视频原文案，支持一键复制到剪贴板。
+    </view>
+    
+    <!-- 用户状态显示 -->
+    <view class="user-status">
+      <view class="status-item" wx:if="{{userStatus.isAnonymous}}">
+        <t-icon name="user" size="24rpx" color="#ff9800" />
+        <text>游客模式 · 今日剩余 {{userStatus.remainingFree}} 次免费使用</text>
+      </view>
+      <view class="status-item" wx:else>
+        <t-icon name="wallet" size="24rpx" color="#4caf50" />
+        <text>当前积分：{{userStatus.credits}}</text>
+      </view>
     </view>
   </view>
 
@@ -30,64 +42,71 @@
     <view class="button-group">
       <t-button
         class="action-btn"
-        theme="primary"
+        theme="{{isLoading ? 'default' : 'primary'}}"
         loading="{{isLoading}}"
-        bind:tap="extractText"
+        bind:tap="{{isLoading ? 'stopExtraction' : 'extractText'}}"
       >
-        提取文案
+        {{isLoading ? '取消提取' : '提取文案'}}
       </t-button>
       <t-button
         class="action-btn"
         theme="default"
         bind:tap="pasteFromClipboard"
+        disabled="{{isLoading}}"
       >
         一键粘贴
       </t-button>
     </view>
   </view>
 
-  <!-- 加载状态 -->
+  <!-- 加载状态和进度 -->
   <view class="loading-container" wx:if="{{isLoading}}">
-    <t-loading text="正在提取文案中..." size="40rpx" />
-  </view>
-
-  <!-- 提取结果 -->
-  <view class="result-card" wx:if="{{!isLoading && textContent}}">
-    <view class="result-header">
-      <view class="result-title">提取到的文案</view>
-      <t-button
-        size="small"
-        theme="primary"
+    <t-loading text="{{loadingText}}" size="40rpx" />
+    <view class="progress-info" wx:if="{{pollingCount > 0}}">
+      <view class="progress-text">已尝试 {{pollingCount}}/{{maxPollingCount}} 次</view>
+      <view class="progress-tip">文案提取可能需要较长时间，请耐心等待</view>
+      <t-button 
+        size="small" 
+        theme="default" 
         variant="outline"
-        bind:tap="copyText"
+        bind:tap="stopExtraction"
+        style="margin-top: 16rpx;"
       >
-        <t-icon name="file-copy" slot="icon" size="24rpx" />
-        复制
+        取消提取
       </t-button>
     </view>
-    <view class="text-content">{{textContent}}</view>
   </view>
 
-  <!-- 历史记录 -->
-  <view class="history-section" wx:if="{{historyList.length > 0}}">
-    <view class="section-title">
-      <t-icon name="time" size="28rpx" color="#666" />
-      <text>提取历史</text>
-    </view>
-    <view class="history-list">
-      <view class="history-item" wx:for="{{historyList}}" wx:key="index">
-        <view class="history-text">{{item.text}}</view>
-        <view class="history-time">{{item.time}}</view>
-        <t-button
-          size="small"
-          theme="default"
-          variant="outline"
-          bind:tap="copyHistoryText"
-          data-text="{{item.text}}"
-        >
-          复制
-        </t-button>
+  <!-- 文案结果弹窗 -->
+  <t-popup 
+    visible="{{showTextPopup}}" 
+    bind:visible-change="onTextPopupVisibleChange"
+    placement="bottom" 
+    close-on-overlay-click="{{true}}"
+    class="text-popup"
+  >
+
+    <view class="popup-content">
+      <view class="text-result">
+              <view class="action-buttons">
+          <t-button theme="primary" block bind:tap="copyAllText">
+            <t-icon name="file-copy" slot="icon"/>
+            复制文案
+          </t-button>
+
+        </view>
+        <view class="text-title" wx:if="{{textResult.title}}">
+          <view class="content"> 标题：{{textResult.title}}</view>
+        </view>
+        
+        <view class="text-content">
+          <view class="content">{{textResult.content}}</view>
+        </view>
+        
+
       </view>
     </view>
-  </view>
+  </t-popup>
+
+
 </view>

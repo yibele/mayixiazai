@@ -1,4 +1,6 @@
 // app.ts
+import userManager from './utils/userManager'
+
 App<IAppOption>({
   globalData: {},
   onLaunch() {
@@ -16,17 +18,22 @@ App<IAppOption>({
       });
     }
 
+    // 初始化用户管理器（静默登录）
+    this.initUserSystem();
+
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        console.log(res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      },
-    })
   },
+
+  // 初始化用户系统
+  async initUserSystem() {
+    try {
+      await userManager.init();
+      console.log('用户系统初始化成功');
+    } catch (error) {
+      console.error('用户系统初始化失败:', error);
+    }
+  }
 })

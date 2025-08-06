@@ -5,7 +5,8 @@
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-loading": "tdesign-miniprogram/loading/loading",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-popup": "tdesign-miniprogram/popup/popup"
   },
   "navigationBarTitleText": "文案提取"
 }

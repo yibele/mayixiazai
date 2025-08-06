@@ -82,19 +82,11 @@
         <t-image class="video-cover" src="{{videoInfo.cover}}" mode="aspectFill" />
         <view class="video-details">
           <view class="video-title">{{videoInfo.title}}</view>
-          <view class="author-info">
-            <t-avatar size="small" image="{{videoInfo.authorAvatar}}" />
-            <view class="author-name">{{videoInfo.author}}</view>
-          </view>
         </view>
         <view class="action-buttons">
           <t-button theme="primary" block bind:tap="goToDownload">
             <t-icon name="download" slot="icon"/>
             下载视频
-          </t-button>
-          <t-button theme="default" block bind:tap="copyText" style="margin-top: 16rpx;">
-            <t-icon name="file-copy" slot="icon"/>
-            复制文案
           </t-button>
         </view>
       </view>
